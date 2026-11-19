@@ -45,3 +45,7 @@ postman/
 #Migrations
 */migrations/*
 !*/migrations/__init__.py
+
+
+#checklists
+req_files/
