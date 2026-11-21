@@ -1,2 +1,3 @@
 
-# Create your models here.
+class Video:
+    pass

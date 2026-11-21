@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "user_auth_app",
     "video_app",
+    "debug_toolbar",
 ]
 
 MIDDLEWARE = [
@@ -60,6 +61,7 @@ MIDDLEWARE = [
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -86,6 +88,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "core.wsgi.application"
 
+DEBUG_TOOLBAR_CONFIG = {
+    "SHOW_TOOLBAR_CALLBACK": "debug_toolbar.middleware.show_toolbar_with_docker",
+}
 
 # Database
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
@@ -97,7 +102,7 @@ DATABASES = {
         "USER": os.environ.get("DB_USER", default="videoflix_user"),
         "PASSWORD": os.environ.get("DB_PASSWORD", default="supersecretpassword"),
         "HOST": os.environ.get("DB_HOST", default="db"),
-        "PORT": os.environ.get("DB_PORT", default=5432),
+        "PORT": os.environ.get("DB_PORT", default="5432"),
     }
 }
 
@@ -113,8 +118,8 @@ CACHES = {
 RQ_QUEUES = {
     "default": {
         "HOST": os.environ.get("REDIS_HOST", default="redis"),
-        "PORT": os.environ.get("REDIS_PORT", default=6379),
-        "DB": os.environ.get("REDIS_DB", default=0),
+        "PORT": os.environ.get("REDIS_PORT", default="6379"),
+        "DB": os.environ.get("REDIS_DB", default="0"),
         "DEFAULT_TIMEOUT": 900,
         "REDIS_CLIENT_KWARGS": {},
     },
