@@ -91,6 +91,7 @@ WSGI_APPLICATION = "core.wsgi.application"
 DEBUG_TOOLBAR_CONFIG = {
     "SHOW_TOOLBAR_CALLBACK": "debug_toolbar.middleware.show_toolbar_with_docker",
 }
+DEBUG_TOOLBAR_CONFIG['IS_RUNNING_TESTS'] = False
 
 # Database
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
