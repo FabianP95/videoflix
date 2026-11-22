@@ -21,7 +21,7 @@ load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+FRONTEND_URL = os.environ.get("FRONTEND_URL")
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.1/howto/deployment/checklist/
 
@@ -91,7 +91,7 @@ WSGI_APPLICATION = "core.wsgi.application"
 DEBUG_TOOLBAR_CONFIG = {
     "SHOW_TOOLBAR_CALLBACK": "debug_toolbar.middleware.show_toolbar_with_docker",
 }
-DEBUG_TOOLBAR_CONFIG['IS_RUNNING_TESTS'] = False
+DEBUG_TOOLBAR_CONFIG["IS_RUNNING_TESTS"] = False
 
 # Database
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
@@ -173,7 +173,7 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Email
 # https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration
-
+DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL")
 MAILERS = {
     "default": {
         "BACKEND": "django.core.mail.backends.console.EmailBackend",
@@ -189,9 +189,21 @@ REST_FRAMEWORK = {
     ],
 }
 
-CORS_ALLOW_CREDENTIALS = True
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
+
+
+PASSWORD_RESET_TIMEOUT = 60 * 60 * 24
+
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOWED_ORIGINS = [
+    "http://192.168.178.130:5500",
+    "http://localhost:5500",
+    "http://127.0.0.1:8000",
+    "http://172.20.160.1:5500",
+    "http://127.0.0.1:5500",
+]
